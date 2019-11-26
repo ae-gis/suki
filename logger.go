@@ -8,10 +8,6 @@
 
 package suki
 
-import (
-        "sync"
-)
-
 type Logging interface {
         With(fields ...interface{}) Logging
         Debug(msg string, fields ...interface{})
@@ -25,14 +21,10 @@ type Logging interface {
 
 var (
         logger *zapLog
-        once   sync.Once
 )
 
 func Instance() *zapLog {
-        once.Do(func() {
-                logger = NewZap(ProductionCore())
-        })
-        return logger
+        return NewZap(ProductionCore())
 }
 
 func With(fields ...interface{}) Logging {
