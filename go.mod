@@ -7,6 +7,7 @@ require (
 	github.com/containerd/continuity v0.0.0-20190827140505-75bee3e2ccb6 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
+	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/go-playground/validator/v10 v10.0.1
 	github.com/go-stack/stack v1.8.0
