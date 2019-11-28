@@ -15,6 +15,7 @@ import (
         "strings"
         "time"
 
+        _ "github.com/lib/pq"
         "gitlab.com/suryakencana007/suki"
 )
 
