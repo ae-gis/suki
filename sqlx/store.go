@@ -225,13 +225,15 @@ func (r *DB) WithTransaction(ctx context.Context, fn func(tx *sql.Tx) error) err
 }
 
 func New(driverName, connString string, retryCount, timeout, concurrent int) (*DB, error) {
-        if db, err := sql.Open(driverName, connString); err == nil {
-                return &DB{
-                        db,
-                        retryCount,
-                        timeout,
-                        concurrent,
-                }, nil
+        db, err := sql.Open(driverName, connString)
+        if err != nil {
+                suki.Error(err.Error())
+                panic(fmt.Errorf("cannot access your db connection").Error())
         }
-        panic(fmt.Errorf("cannot access your db connection").Error())
+        return &DB{
+                db,
+                retryCount,
+                timeout,
+                concurrent,
+        }, nil
 }
