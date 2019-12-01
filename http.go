@@ -63,7 +63,7 @@ type cmdHttp struct {
 // `baseCtx`.
 func (c *cmdHttp) serverRoute(ctx context.Context) http.Handler {
         fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-                if r.ProtoMajor == 2 && strings.HasPrefix(
+                if r.ProtoMajor == 2 && strings.Contains(
                         r.Header.Get("Content-Type"), "application/grpc") &&
                         c.grpcHandler != nil {
                         c.grpcHandler.ServeHTTP(w, r.WithContext(ctx))
