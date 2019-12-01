@@ -40,7 +40,7 @@ func Velkommen() string {
 }
 
 type CmdHttp interface {
-        handlerFunc(handler http.Handler) error
+        handlerFunc(ctx context.Context, handler http.Handler) error
         command(cmd *cobra.Command, args []string) error
         GetCmd() *cobra.Command
         GRPCHandler(handler *grpc.Server)
@@ -61,14 +61,14 @@ type cmdHttp struct {
 
 // ServerBaseContext wraps an http.Handler to set the request context to the
 // `baseCtx`.
-func (c *cmdHttp) serverRoute() http.Handler {
+func (c *cmdHttp) serverRoute(ctx context.Context) http.Handler {
         fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
                 if r.ProtoMajor == 2 && strings.HasPrefix(
                         r.Header.Get("Content-Type"), "application/grpc") &&
                         c.grpcHandler != nil {
-                        c.grpcHandler.ServeHTTP(w, r)
+                        c.grpcHandler.ServeHTTP(w, r.WithContext(ctx))
                 } else {
-                        c.handler.ServeHTTP(w, r)
+                        chi.ServerBaseContext(ctx, c.handler).ServeHTTP(w, r)
                 }
         })
         return fn
@@ -78,8 +78,7 @@ func (c *cmdHttp) GRPCHandler(handler *grpc.Server) {
         c.grpcHandler = handler
 }
 
-func (c *cmdHttp) handlerFunc(handler http.Handler) error {
-        ctx := context.Background()
+func (c *cmdHttp) handlerFunc(ctx context.Context, handler http.Handler) error {
         go func() {
                 defer c.srv.Stop()
                 <-ctx.Done()
@@ -92,7 +91,7 @@ func (c *cmdHttp) handlerFunc(handler http.Handler) error {
                 addrURL,
                 c.ReadTimeout,
                 c.WriteTimeout,
-                chi.ServerBaseContext(ctx, handler),
+                handler,
         )
         sc := make(chan os.Signal, 10)
         signal.Notify(sc, os.Interrupt, syscall.SIGTERM)
@@ -118,7 +117,8 @@ func (c *cmdHttp) command(cmd *cobra.Command, args []string) error {
                         Velkommen(),
                         c.Port,
                 ))
-        return c.handlerFunc(c.serverRoute())
+        ctx := context.Background()
+        return c.handlerFunc(ctx, c.serverRoute(ctx))
 }
 
 func (c *cmdHttp) GetCmd() *cobra.Command {
