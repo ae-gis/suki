@@ -43,6 +43,7 @@ type CmdHttp interface {
         handlerFunc(handler http.Handler) error
         command(cmd *cobra.Command, args []string) error
         GetCmd() *cobra.Command
+        GRPCHandler(handler *grpc.Server)
 }
 
 type cmdHttp struct {
