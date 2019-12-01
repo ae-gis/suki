@@ -67,8 +67,9 @@ func (c *cmdHttp) serverRoute() http.Handler {
                         r.Header.Get("Content-Type"), "application/grpc") &&
                         c.grpcHandler != nil {
                         c.grpcHandler.ServeHTTP(w, r)
+                } else {
+                        c.handler.ServeHTTP(w, r)
                 }
-                c.handler.ServeHTTP(w, r)
         })
         return fn
 }
