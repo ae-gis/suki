@@ -16,12 +16,14 @@ import (
         "net/url"
         "os"
         "os/signal"
+        "strings"
         "sync"
         "syscall"
         "time"
 
         "github.com/go-chi/chi"
         "github.com/spf13/cobra"
+        "google.golang.org/grpc"
 )
 
 func Velkommen() string {
@@ -52,7 +54,26 @@ type cmdHttp struct {
         Filename     string
         Cmd          *cobra.Command
         handler      http.Handler
+        grpcHandler  *grpc.Server
         srv          *Server
+}
+
+// ServerBaseContext wraps an http.Handler to set the request context to the
+// `baseCtx`.
+func (c *cmdHttp) serverRoute() http.Handler {
+        fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+                if r.ProtoMajor == 2 && strings.HasPrefix(
+                        r.Header.Get("Content-Type"), "application/grpc") &&
+                        c.grpcHandler != nil {
+                        c.grpcHandler.ServeHTTP(w, r)
+                }
+                c.handler.ServeHTTP(w, r)
+        })
+        return fn
+}
+
+func (c *cmdHttp) GRPCHandler(handler *grpc.Server) {
+        c.grpcHandler = handler
 }
 
 func (c *cmdHttp) handlerFunc(handler http.Handler) error {
@@ -95,7 +116,7 @@ func (c *cmdHttp) command(cmd *cobra.Command, args []string) error {
                         Velkommen(),
                         c.Port,
                 ))
-        return c.handlerFunc(c.handler)
+        return c.handlerFunc(c.serverRoute())
 }
 
 func (c *cmdHttp) GetCmd() *cobra.Command {
