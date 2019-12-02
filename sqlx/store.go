@@ -42,9 +42,9 @@ type Factory interface {
 
 type DB struct {
         *sql.DB
-        retryCount int
-        timeout    int
-        concurrent int
+        RetryCount int
+        Timeout    int
+        Concurrent int
 }
 
 func (r *DB) Close() error {
@@ -52,11 +52,11 @@ func (r *DB) Close() error {
 }
 
 func (r *DB) BeginCtx() (context.Context, context.CancelFunc) {
-        return context.WithTimeout(context.Background(), 10*time.Second)
+        return context.WithTimeout(context.Background(), time.Duration(r.Timeout)*time.Second)
 }
 
 func (r *DB) BeginTx(ctx context.Context) (*sql.Tx, context.CancelFunc) {
-        c, cancel := context.WithTimeout(ctx, time.Duration(r.timeout)*time.Second)
+        c, cancel := context.WithTimeout(ctx, time.Duration(r.Timeout)*time.Second)
         tx, err := r.DB.BeginTx(c, &sql.TxOptions{Isolation: sql.LevelSerializable})
         if err != nil {
                 panic(err)
