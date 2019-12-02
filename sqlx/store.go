@@ -52,7 +52,7 @@ func (r *DB) Close() error {
 }
 
 func (r *DB) BeginCtx() (context.Context, context.CancelFunc) {
-        return context.WithTimeout(context.Background(), time.Duration(r.timeout)*time.Second)
+        return context.WithTimeout(context.Background(), 10*time.Second)
 }
 
 func (r *DB) BeginTx(ctx context.Context) (*sql.Tx, context.CancelFunc) {
