@@ -83,6 +83,7 @@ func TestRawQuery_UpdatesFewField(t *testing.T) {
         game.Enabled = true
         rawUpdates := Build()
         query, args := rawUpdates.Updates(game).Where("game_code = ? AND game_description > ?", game.Code, 23).ToSQL()
+        t.Log(query)
         assert.Contains(t, query, "UPDATE ref_game SET enabled = $2, game_code = $3, game_description = $4, game_id = $5, game_title = $6, write_date = $1")
         assert.Equal(t, len(args), 8)
 }
