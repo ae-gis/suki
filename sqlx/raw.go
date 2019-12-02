@@ -78,7 +78,7 @@ func (s *Query) Where(query interface{}, args ...interface{}) *Query {
 
 func (s *Query) ToSQL() (string, []interface{}) {
         s.raw.Exec()
-        if strings.Contains(s.Query, "insert") || strings.Contains(s.Query, "insert") {
+        if strings.EqualFold(s.Query, "insert") || strings.EqualFold(s.Query, "insert") {
                 s.Query = strings.Join([]string{s.Query, "RETURNING id"}, " ")
         }
         return s.Query, s.Args
