@@ -36,6 +36,7 @@ type Factory interface {
         TxExecContextWithID(ctx context.Context, tx *sql.Tx, query string, args ...interface{}) (ids interface{}, err error)
         TxExecContext(ctx context.Context, tx *sql.Tx, query string, args ...interface{}) (affected int64, err error)
         TxCommit(ctx context.Context, tx *sql.Tx) error
+        WithTransaction(ctx context.Context, fn func(tx *sql.Tx) error) error
         PrepareContext(ctx context.Context, query string) (stmt *sql.Stmt, err error)
 }
 
