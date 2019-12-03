@@ -21,5 +21,6 @@ require (
 	github.com/spf13/cobra v0.0.5
 	github.com/stretchr/testify v1.4.0
 	go.uber.org/zap v1.13.0
+	golang.org/x/crypto v0.0.0-20191202143827-86a70503ff7e // indirect
 	google.golang.org/grpc v1.25.1
 )
