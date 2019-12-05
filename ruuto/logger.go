@@ -12,8 +12,8 @@ import (
         "net/http"
         "time"
 
+        "github.com/ae-gis/suki"
         "github.com/felixge/httpsnoop"
-        "gitlab.com/suryakencana007/suki"
 )
 
 func Logger() func(next http.Handler) http.Handler {

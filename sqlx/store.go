@@ -15,8 +15,8 @@ import (
         "strings"
         "time"
 
+        "github.com/ae-gis/suki"
         _ "github.com/lib/pq"
-        "gitlab.com/suryakencana007/suki"
 )
 
 const POSTGRES string = "postgres"

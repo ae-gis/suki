@@ -66,9 +66,9 @@ func TestZapStdOutInit(t *testing.T) {
         out := <-outC
         expected := []string{
                 `{"level":"info","msg":"received work order",` + LoggerStackCaller(827, "") + `}`,
-                `{"level":"debug","msg":"starting work",` + LoggerStackCaller(827, "")+`}`,
-                        `{"level":"warn","msg":"work may fail",`+LoggerStackCaller(827, "")+`}`,
-                        `{"level":"error","msg":"work failed",`+LoggerStackCaller(827, "")+`}`,
+                `{"level":"debug","msg":"starting work",` + LoggerStackCaller(827, "") + `}`,
+                `{"level":"warn","msg":"work may fail",` + LoggerStackCaller(827, "") + `}`,
+                `{"level":"error","msg":"work failed",` + LoggerStackCaller(827, "") + `}`,
         }
         assert.Equal(t,
                 strings.Join(expected, "\n")+"\n",

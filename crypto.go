@@ -92,7 +92,7 @@ func VerifyPassword(hashpassword, password string) (bool, error) {
                 return false, fmt.Errorf("invalid digest")
         }
         var (
-                keyLen    int
+                keyLen   int
                 hashFunc func() hash.Hash
         )
         switch hdr[1] {

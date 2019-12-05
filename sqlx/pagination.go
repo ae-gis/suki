@@ -14,7 +14,7 @@ import (
         "strconv"
         "strings"
 
-        "gitlab.com/suryakencana007/suki"
+        "github.com/ae-gis/suki"
 )
 
 type Pagination struct {

@@ -60,4 +60,3 @@ var (
         allowFields = []string{"group_id", "category", "name", "activated", "confirmation_date"}
         aka         = "g"
 )
-

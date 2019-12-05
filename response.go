@@ -58,7 +58,6 @@ func (r *response) Success(code string) {
         r.Meta = Meta{Code: code}
 }
 
-
 func (r *response) Body(body interface{}) {
         r.Data = body
 }

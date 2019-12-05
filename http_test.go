@@ -97,7 +97,7 @@ func TestListenAndServe(t *testing.T) {
         )
         stop := make(chan bool)
 
-        cc := &cmdHttp{stop: stop, Port: Port+4}
+        cc := &cmdHttp{stop: stop, Port: Port + 4}
         cc.Cmd = &cobra.Command{
                 Use:   "http",
                 Short: "Used to run the http service",
@@ -116,4 +116,3 @@ func TestListenAndServe(t *testing.T) {
         stop <- true
         wg.Wait()
 }
-

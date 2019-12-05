@@ -46,4 +46,3 @@ func (o tagOptions) Contains(optionName string) bool {
         }
         return false
 }
-

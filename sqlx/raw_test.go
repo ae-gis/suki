@@ -12,19 +12,19 @@ import (
         "testing"
         "time"
 
-        "gitlab.com/suryakencana007/suki"
+        "github.com/ae-gis/suki"
 
         "github.com/stretchr/testify/assert"
 )
 
 func TestRawQuery_Select2Join(t *testing.T) {
         member := &Member{
-                ID:        34,
-                Name:      "Utomo Abdai",
+                ID:   34,
+                Name: "Utomo Abdai",
         }
         user := &User{
-                ID:        12,
-                Name:      "Budi Utomo",
+                ID:   12,
+                Name: "Budi Utomo",
         }
         game := &Game{
                 ID:          507,
@@ -42,8 +42,8 @@ func TestRawQuery_Select2Join(t *testing.T) {
 
 func TestRawQuery_SelectJoin(t *testing.T) {
         user := &User{
-                ID:        12,
-                Name:      "Budi Utomo",
+                ID:   12,
+                Name: "Budi Utomo",
         }
         game := &Game{
                 ID:          507,
@@ -147,15 +147,14 @@ func (Game) TableName() string {
         return "ref_game"
 }
 
-
 type User struct {
-        CreatedAt   time.Time  `json:"create_date,omitempty"`
-        CreatedBy   string     `json:"created_by,omitempty"`
-        UpdatedAt   time.Time  `json:"write_date,omitempty"`
-        UpdatedBy   string     `json:"updated_by,omitempty"`
-        DeletedAt   time.Time  `json:"deleted_at,omitempty"`
-        ID          int        `json:"user_id" sql:"id"`
-        Name        string     `json:"user_name" sql:"name"`
+        CreatedAt time.Time `json:"create_date,omitempty"`
+        CreatedBy string    `json:"created_by,omitempty"`
+        UpdatedAt time.Time `json:"write_date,omitempty"`
+        UpdatedBy string    `json:"updated_by,omitempty"`
+        DeletedAt time.Time `json:"deleted_at,omitempty"`
+        ID        int       `json:"user_id" sql:"id"`
+        Name      string    `json:"user_name" sql:"name"`
 }
 
 func (User) TableName() string {
@@ -163,13 +162,13 @@ func (User) TableName() string {
 }
 
 type Member struct {
-        CreatedAt   time.Time  `json:"create_date,omitempty"`
-        CreatedBy   string     `json:"created_by,omitempty"`
-        UpdatedAt   time.Time  `json:"write_date,omitempty"`
-        UpdatedBy   string     `json:"updated_by,omitempty"`
-        DeletedAt   time.Time  `json:"deleted_at,omitempty"`
-        ID          int        `json:"user_id" sql:"id"`
-        Name        string     `json:"user_name" sql:"name"`
+        CreatedAt time.Time `json:"create_date,omitempty"`
+        CreatedBy string    `json:"created_by,omitempty"`
+        UpdatedAt time.Time `json:"write_date,omitempty"`
+        UpdatedBy string    `json:"updated_by,omitempty"`
+        DeletedAt time.Time `json:"deleted_at,omitempty"`
+        ID        int       `json:"user_id" sql:"id"`
+        Name      string    `json:"user_name" sql:"name"`
 }
 
 func (Member) TableName() string {

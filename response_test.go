@@ -34,7 +34,7 @@ func TestResponseErrors(t *testing.T) {
                 Code:    StatusCode(StatusInternalError),
                 Type:    "1000",
                 Message: "constraint unique key duplicate",
-        }, )
+        })
 
         result := Response()
         result.Errors(errs...)
@@ -49,7 +49,7 @@ func TestResponseErrorsJSON(t *testing.T) {
                 Code:    StatusCode(StatusInternalError),
                 Type:    "1000",
                 Message: "constraint unique key duplicate",
-        }, )
+        })
         result := Response()
         result.Errors(errs...)
 

@@ -71,4 +71,3 @@ type group struct {
         UpdatedBy   string         `json:"updated_by" rql:"filter"`
         DeletedAt   *time.Time     `json:"deleted_at"`
 }
-
