@@ -24,6 +24,3 @@ configs/app.config.staging.toml
 configs/app.config.production.toml
 configs/app.config.local.toml
 package-lock.json
-
-go.mod
-go.sum
