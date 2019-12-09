@@ -9,7 +9,7 @@ The common Japanese word suki, pronounced "suh-kee", means a liking of, or fondn
 ```go
 package main
 import (
-    "gitlab.com/suryakencana007/suki"
+    "github.com/ae-gis/suki"
 )
 
 func main(){
@@ -52,7 +52,7 @@ import (
      "fmt"
      "html"
      "net/http"
-     "gitlab.com/suryakencana007/suki"
+     "github.com/ae-gis/suki"
 )
 
 func main(){
@@ -77,7 +77,7 @@ package main
 import (
     "net/http"
     "github.com/hashicorp/go-cleanhttp"
-    "gitlab.com/suryakencana007/suki"
+    "github.com/ae-gis/suki"
 )
 
 func main() {

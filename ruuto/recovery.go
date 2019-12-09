@@ -11,7 +11,7 @@ package ruuto
 import (
         "net/http"
 
-        "gitlab.com/suryakencana007/suki"
+        "github.com/ae-gis/suki"
 )
 
 func Recovery() func(next http.Handler) http.Handler {
