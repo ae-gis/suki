@@ -115,5 +115,5 @@ func VerifyPassword(hashpassword, password string) (bool, error) {
                 return false, fmt.Errorf("invalid hashPass salt")
         }
         key := pbkdf2.Key([]byte(password), salt, rounds, keyLen, hashFunc)
-        return fields[4] == PassLibBase64Encode(key), fmt.Errorf("hash result: %v", PassLibBase64Encode(key))
+        return fields[4] == PassLibBase64Encode(key), nil
 }
