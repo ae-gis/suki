@@ -28,7 +28,7 @@ type TxArgs struct {
 
 type Factory interface {
         Close() error
-        BeginCtx() (context.Context, context.CancelFunc)
+        BeginCtx(ctx context.Context) (context.Context, context.CancelFunc)
         BeginTx(ctx context.Context) (*sql.Tx, context.CancelFunc)
         QueryCtx(ctx context.Context, fn func(rs *sql.Rows) error, query string, args ...interface{}) error
         QueryRowCtx(ctx context.Context, fn func(rs *sql.Row) error, query string, args ...interface{}) error
@@ -51,8 +51,8 @@ func (r *DB) Close() error {
         return r.DB.Close()
 }
 
-func (r *DB) BeginCtx() (context.Context, context.CancelFunc) {
-        return context.WithTimeout(context.Background(), time.Duration(r.Timeout)*time.Second)
+func (r *DB) BeginCtx(ctx context.Context) (context.Context, context.CancelFunc) {
+        return context.WithTimeout(ctx, time.Duration(r.Timeout)*time.Second)
 }
 
 func (r *DB) BeginTx(ctx context.Context) (*sql.Tx, context.CancelFunc) {
