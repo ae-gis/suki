@@ -12,7 +12,7 @@ import (
         "testing"
         "time"
 
-        "github.com/ae-gis/suki"
+        "gitlab.com/suryakencana007/suki"
 
         "github.com/stretchr/testify/assert"
 )
