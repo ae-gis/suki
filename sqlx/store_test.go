@@ -15,7 +15,7 @@ import (
         "testing"
         "time"
 
-        "github.com/ae-gis/suki"
+        "gitlab.com/suryakencana007/suki"
 
         "github.com/lib/pq"
         "github.com/ory/dockertest"

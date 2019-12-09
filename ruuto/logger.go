@@ -12,7 +12,7 @@ import (
         "net/http"
         "time"
 
-        "github.com/ae-gis/suki"
+        "gitlab.com/suryakencana007/suki"
         "github.com/felixge/httpsnoop"
 )
 

@@ -15,7 +15,7 @@ import (
         "strings"
         "time"
 
-        "github.com/ae-gis/suki"
+        "gitlab.com/suryakencana007/suki"
         _ "github.com/lib/pq"
 )
 

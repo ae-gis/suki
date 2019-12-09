@@ -18,7 +18,7 @@ import (
         "time"
         "unicode"
 
-        "github.com/ae-gis/suki"
+        "gitlab.com/suryakencana007/suki"
 )
 
 type formatField func(key string, n int, opts tagOptions) string
