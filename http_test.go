@@ -9,7 +9,6 @@
 package suki
 
 import (
-        "context"
         "fmt"
         "html"
         "net/http"
@@ -97,13 +96,14 @@ func TestListenAndServe(t *testing.T) {
                 wg  sync.WaitGroup
         )
         stop := make(chan bool)
+
         cc := &cmdHttp{stop: stop, Port: Port + 4}
         cc.Cmd = &cobra.Command{
                 Use:   "http",
                 Short: "Used to run the http service",
                 RunE: func(cmd *cobra.Command, args []string) (err error) {
                         mux := chi.NewMux()
-                        return cc.handlerFunc(context.Background(), mux)
+                        return cc.handlerFunc(mux)
                 },
         }
 
