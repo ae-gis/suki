@@ -54,8 +54,8 @@ func (r *response) Errors(err ...Meta) {
         r.Meta = err
 }
 
-func (r *response) Success(code string) {
-        r.Meta = Meta{Code: code}
+func (r *response) Success(success Meta) {
+        r.Meta = success
 }
 
 func (r *response) Body(body interface{}) {
@@ -68,4 +68,76 @@ func (r *response) Page(p Pagination) {
 
 func Status(r *http.Request, status int) {
         *r = *r.WithContext(context.WithValue(r.Context(), CtxResponse, status))
+}
+
+// APIStatusSuccess for standard request api status success
+func (r *response) APIStatusSuccess() {
+        r.Success(Meta{
+                Code:    StatusCode(StatusSuccess),
+                Type:    StatusCode(StatusSuccess),
+                Message: StatusText(StatusSuccess),
+        })
+}
+
+// APIStatusCreated
+func (r *response) APIStatusCreated() {
+        r.Success(Meta{
+                Code:    StatusCode(StatusCreated),
+                Type:    StatusCode(StatusCreated),
+                Message: StatusText(StatusCreated),
+        })
+}
+
+// APIStatusAccepted
+func (r *response) APIStatusAccepted() {
+        r.Success(Meta{
+                Code:    StatusCode(StatusAccepted),
+                Type:    StatusCode(StatusAccepted),
+                Message: StatusText(StatusAccepted),
+        })
+}
+
+// APIStatusErrorUnknown
+func (r *response) APIStatusErrorUnknown(err error) {
+        r.Errors(Meta{
+                Code:    StatusCode(StatusErrorUnknown),
+                Type:    StatusCode(StatusErrorUnknown),
+                Message: err.Error(),
+        })
+}
+
+// APIStatusInvalidAuthentication
+func (r *response) APIStatusInvalidAuthentication(err error) {
+        r.Errors(Meta{
+                Code:    StatusCode(StatusInvalidAuthentication),
+                Type:    StatusCode(StatusInvalidAuthentication),
+                Message: err.Error(),
+        })
+}
+
+// APIStatusUnauthorized
+func (r *response) APIStatusUnauthorized(err error) {
+        r.Errors(Meta{
+                Code:    StatusCode(StatusUnauthorized),
+                Type:    StatusCode(StatusUnauthorized),
+                Message: err.Error(),
+        })
+}
+
+// APIStatusForbidden
+func (r *response) APIStatusForbidden(err error) {
+        r.Errors(Meta{
+                Code:    StatusCode(StatusForbidden),
+                Type:    StatusCode(StatusForbidden),
+                Message: err.Error(),
+        })
+}
+
+// APIStatusBadRequest
+func (r *response) APIStatusBadRequest(err error) {
+        r.Errors(Meta{
+                Code:    StatusCode(StatusErrorForm),
+                Type:    StatusCode(StatusErrorForm),
+                Message: err.Error(),
+        })
 }

@@ -25,6 +25,8 @@ func TestNew(t *testing.T) {
         }
         result := Response()
         result.Body(data)
+        result.APIStatusSuccess()
+        t.Log(result)
         assert.Equal(t, result.Data, data)
 }
 
